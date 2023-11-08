@@ -14,18 +14,9 @@ public class Game {
     @SerializedName("background_image")
     @Expose
     private String image;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("rating")
-    @Expose
-    private String rating;
     @SerializedName("metacritic")
     @Expose
     private String metacritic;
-    @SerializedName("released")
-    @Expose
-    private String released;
 
     public Integer getId() {
         return id;
@@ -51,22 +42,6 @@ public class Game {
         this.image = image;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
     public String getMetacritic() {
         return metacritic;
     }
@@ -75,11 +50,4 @@ public class Game {
         this.metacritic = metacritic;
     }
 
-    public String getReleased() {
-        return released;
-    }
-
-    public void setReleased(String released) {
-        this.released = released;
-    }
 }

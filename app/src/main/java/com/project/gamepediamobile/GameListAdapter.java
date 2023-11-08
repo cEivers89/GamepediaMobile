@@ -1,6 +1,7 @@
 package com.project.gamepediamobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.project.gamepediamobile.Activities.DetailActivity;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +27,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @NonNull
     @Override
     public GameListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_film, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_game, parent, false);
         context = parent.getContext();
         return new ViewHolder(inflate);
     }
@@ -38,13 +41,12 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 .load(games.get(position).getImage())
                 .centerCrop()
                 .into(holder.pic);
-        /*
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
-            intent.putExtra("id", listGames.getData().get(position).getId());
+            intent.putExtra("id", games.get(position).getId());
             holder.itemView.getContext().startActivity(intent);
         });
-         */
     }
 
     @Override

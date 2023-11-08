@@ -24,10 +24,10 @@ import com.project.gamepediamobile.R;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView.Adapter adapterNewGames, adapterUpcomingGames;
-    private RecyclerView recyclerViewNewGames, recyclerViewUpcomingGames;
+    private RecyclerView.Adapter adapterNewGames, adapterUpcomingGames, adapterTopGames;
+    private RecyclerView recyclerViewNewGames, recyclerViewUpcomingGames, recyclerViewTopGames;
     private RequestQueue requestQueue;
-    private ProgressBar progressBar, progressBar2;
+    private ProgressBar progressBar, progressBar2, progressbar3;
 
 
 
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         fetchRecentGames();
         fetchUpcomingGames();
+        fetchTopGames();
     }
 
     private void fetchRecentGames() {
@@ -63,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
     private void fetchUpcomingGames() {
         requestQueue = Volley.newRequestQueue(this);
         progressBar2.setVisibility(View.VISIBLE);
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key=" + Constants.API_KEY + "&dates=" + Constants.getTodayDate() + "," + Constants.getOneYearFromToday() + "&ordering=-added",
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key="
+                + Constants.API_KEY + "&dates=" + Constants.getTodayDate()
+                + "," + Constants.getOneYearFromToday() + "&ordering=-added",
                 response -> {
                     Gson gson = new Gson();
                     progressBar2.setVisibility(View.GONE);
@@ -79,6 +82,26 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest2);
     }
 
+    private void fetchTopGames() {
+        requestQueue = Volley.newRequestQueue(this);
+        progressbar3.setVisibility(View.VISIBLE);
+        StringRequest stringRequest3 = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key="
+                + Constants.API_KEY + "&dates=" + Constants.getOneYearAgo()  + "," + Constants.getTodayDate()  + "&metacritic=80,100&ordering=-added",
+                response -> {
+                    Gson gson = new Gson();
+                    progressbar3.setVisibility(View.GONE);
+                    GameResponse gameResponse = gson.fromJson(response, GameResponse.class);
+                    List<Game> items = gameResponse.getGames();
+                    //Log.i("TAG", "fetchTopGames: " + response);
+                    adapterTopGames = new GameListAdapter(items);
+                    recyclerViewTopGames.setAdapter(adapterTopGames);
+                }, error -> {
+            Log.i("TAG", "fetchTopGames: " + error.toString());
+            progressbar3.setVisibility(View.GONE);
+        });
+        requestQueue.add(stringRequest3);
+    }
+
     private void initView() {
         recyclerViewNewGames = findViewById(R.id.recyclerViewNewReleases);
         recyclerViewNewGames.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -86,7 +109,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewUpcomingGames = findViewById(R.id.recyclerViewUpcomingReleases);
         recyclerViewUpcomingGames.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        recyclerViewTopGames = findViewById(R.id.recyclerViewTopGames);
+        recyclerViewTopGames.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         progressBar = findViewById(R.id.progressBarNewReleases);
         progressBar2 = findViewById(R.id.progressBarUpcomingReleases);
+        progressbar3 = findViewById(R.id.progressBarTopGames);
     }
 }

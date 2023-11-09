@@ -1,4 +1,4 @@
-package com.project.gamepediamobile;
+package com.project.gamepediamobile.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.project.gamepediamobile.Activities.DetailActivity;
+import com.project.gamepediamobile.GameFiles.Game;
+import com.project.gamepediamobile.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

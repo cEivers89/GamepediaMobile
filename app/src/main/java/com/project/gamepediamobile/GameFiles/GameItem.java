@@ -1,8 +1,9 @@
-package com.project.gamepediamobile;
+package com.project.gamepediamobile.GameFiles;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameItem {
@@ -34,11 +35,8 @@ public class GameItem {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("image")
-    @Expose
-    private List<String> screenshots;
 
-    public GameItem(Integer id, String name, String released, String backgroundImage, Integer metacritic, Double rating, Integer playtime, String description, List<String> screenshots) {
+    public GameItem(Integer id, String name, String released, String backgroundImage, Integer metacritic, Double rating, Integer playtime, String description) {
         this.id = id;
         this.name = name;
         this.released = released;
@@ -47,7 +45,6 @@ public class GameItem {
         this.rating = rating;
         this.playtime = playtime;
         this.description = description;
-        this.screenshots = screenshots;
     }
 
     public GameItem() {
@@ -126,11 +123,56 @@ public class GameItem {
         this.description = description;
     }
 
-    public List<String> getScreenshots() {
-        return screenshots;
+    public static class Screenshot {
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+
+        @SerializedName("image")
+        @Expose
+        private String image;
+
+        public Screenshot(Integer id, String image) {
+            this.id = id;
+            this.image = image;
+        }
+
+        public Screenshot() {
+            super();
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
     }
 
-    public void setScreenshots(List<String> screenshots) {
+    @SerializedName("results")
+    @Expose
+    private List<Screenshot> screenshots;
+
+    public List<String> getScreenshots() {
+        List<String> images = new ArrayList<>();
+        if (screenshots != null) {
+            for (Screenshot screenshot : screenshots) {
+                images.add(screenshot.getImage());
+            }
+        }
+        return images;
+    }
+
+    public void setScreenshots(List<Screenshot> screenshots) {
         this.screenshots = screenshots;
     }
 }

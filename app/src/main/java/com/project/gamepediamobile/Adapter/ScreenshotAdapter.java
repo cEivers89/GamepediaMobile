@@ -1,4 +1,4 @@
-package com.project.gamepediamobile;
+package com.project.gamepediamobile.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -17,15 +17,25 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.project.gamepediamobile.R;
 
 import java.util.List;
 
 public class ScreenshotAdapter extends RecyclerView.Adapter<ScreenshotAdapter.ViewHolder> {
     List<String> screenshots;
+    private OnItemClickListener listener;
     Context context;
 
-    public ScreenshotAdapter(List<String> screenshots) {
+
+
+    public ScreenshotAdapter(List<String> screenshots, OnItemClickListener listener) {
+
         this.screenshots = screenshots;
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClicked(String imageUrl);
     }
 
     @NonNull
@@ -40,19 +50,13 @@ public class ScreenshotAdapter extends RecyclerView.Adapter<ScreenshotAdapter.Vi
     public void onBindViewHolder(@NonNull ScreenshotAdapter.ViewHolder holder, int position) {
         Glide.with(context)
                 .load(screenshots.get(position))
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        Log.e("GLIDE", "Load failed", e);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
                 .into(holder.images);
+
+        holder.images.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClicked(screenshots.get(position));
+            }
+        });
     }
 
     @Override

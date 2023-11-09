@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 import com.project.gamepediamobile.Constants;
-import com.project.gamepediamobile.Game;
-import com.project.gamepediamobile.GameListAdapter;
-import com.project.gamepediamobile.GameResponse;
+import com.project.gamepediamobile.GameFiles.Game;
+import com.project.gamepediamobile.Adapter.GameListAdapter;
+import com.project.gamepediamobile.GameFiles.GameResponse;
 import com.project.gamepediamobile.R;
 
 import java.util.List;

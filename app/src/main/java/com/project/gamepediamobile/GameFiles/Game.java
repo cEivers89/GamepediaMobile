@@ -1,4 +1,4 @@
-package com.project.gamepediamobile;
+package com.project.gamepediamobile.GameFiles;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

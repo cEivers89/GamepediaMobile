@@ -120,7 +120,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <TextView
-                        android:id="@+id/metacriticScore"
+                        android:id="@+id/ratingTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -179,7 +179,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="test"
+                android:text="Coming soon..."
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView17"
@@ -187,7 +187,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/screenshotsTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -202,6 +202,20 @@
                 app:layout_constraintStart_toStartOf="@+id/gameDescription"
                 app:layout_constraintTop_toBottomOf="@id/gameDescription" />
 
+            <TextView
+                android:id="@+id/screenshotsSeeAllTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:text="See all"
+                android:textColor="#399cbd"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/gameDescription"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/imagesRecyclerView"
                 android:layout_width="match_parent"
@@ -211,7 +225,7 @@
                 android:paddingEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintTop_toBottomOf="@+id/screenshotsTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

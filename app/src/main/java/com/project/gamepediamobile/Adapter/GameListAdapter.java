@@ -37,7 +37,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull GameListAdapter.ViewHolder holder, int position) {
         holder.titleTxt.setText(games.get(position).getName());
-        holder.scoreTxt.setText(games.get(position).getMetacritic());
+        holder.scoreTxt.setText(games.get(position).getRating());
 
         Glide.with(holder.itemView.getContext())
                 .load(games.get(position).getImage())

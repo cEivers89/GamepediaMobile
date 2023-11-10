@@ -1,42 +1,30 @@
 package com.project.gamepediamobile.Activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.Html;
-import android.text.Layout;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
+import com.project.gamepediamobile.Adapter.ScreenshotAdapter;
 import com.project.gamepediamobile.Constants;
 import com.project.gamepediamobile.GameFiles.GameItem;
 import com.project.gamepediamobile.R;
-import com.project.gamepediamobile.Adapter.ScreenshotAdapter;
 
 import java.util.List;
 
@@ -45,12 +33,12 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
     RequestQueue requestQueue;
     ProgressBar progressBar;
     StringRequest stringRequest;
-    private TextView gameNameTxt, metacriticScore, playTimeTxt, releaseDateTxt, gameDescription;
+    private TextView gameNameTxt, ratingTxt, playTimeTxt, releaseDateTxt, gameDescription;
     private NestedScrollView scrollView;
     private int idGame;
     private ShapeableImageView gameImage;
     private ImageView backBtn, pic2;
-    private RecyclerView.Adapter adapterScreenshots;
+    private ScreenshotAdapter screenshotAdapter;
     private RecyclerView screenshotRecyclerView;
 
     @Override
@@ -83,7 +71,7 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
                     .into(pic2);
 
             gameNameTxt.setText(item.getName());
-            metacriticScore.setText(String.valueOf(item.getMetacritic()));
+            ratingTxt.setText(String.valueOf(item.getRating()));
             playTimeTxt.setText(String.valueOf(item.getPlaytime()));
             releaseDateTxt.setText(item.getReleased());
             gameDescription.setText(Html.fromHtml(item.getDescription(), Html.FROM_HTML_MODE_COMPACT));
@@ -97,7 +85,7 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
     private void fetchScreenShots() {
         requestQueue = Volley.newRequestQueue(this);
         progressBar.setVisibility(View.VISIBLE);
-        stringRequest = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "/" + idGame + "/screenshots?key=" + Constants.API_KEY, response -> {
+        stringRequest = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "/" + idGame + "/screenshots?key=" + Constants.API_KEY + "&page_size=5", response -> {
             Gson gson = new Gson();
             progressBar.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
@@ -107,8 +95,8 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
             // DEBUGGING ONLY - Log.i("TAG", "fetchScreenShots: " + item.getScreenshots());
 
             if (item.getScreenshots() != null && !screenshots.isEmpty()) {
-                adapterScreenshots = new ScreenshotAdapter(item.getScreenshots(), this);
-                screenshotRecyclerView.setAdapter(adapterScreenshots);
+                screenshotAdapter = new ScreenshotAdapter(item.getScreenshots(), this);
+                screenshotRecyclerView.setAdapter(screenshotAdapter);
             }
         }, error -> {
             progressBar.setVisibility(View.GONE);
@@ -123,21 +111,15 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
     }
 
     private void showExpandedImage(String imageUrl) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.dialog_image_viewer, null);
-        ImageView expandedImage = dialogView.findViewById(R.id.expanded_image);
+        Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.dialog_expand_image);
+        ImageView expandedImage = dialog.findViewById(R.id.expanded_image);
 
         Glide.with(this)
                 .load(imageUrl)
                 .into(expandedImage);
 
         Log.i("TAG", "showExpandedImage: " + imageUrl);
-
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         expandedImage.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
@@ -147,7 +129,7 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
         progressBar = findViewById(R.id.detailLoading);
         scrollView = findViewById(R.id.scrollView3);
         gameNameTxt = findViewById(R.id.gameNameTxt);
-        metacriticScore = findViewById(R.id.metacriticScore);
+        ratingTxt = findViewById(R.id.ratingTxt);
         playTimeTxt = findViewById(R.id.playTimeTxt);
         releaseDateTxt = findViewById(R.id.releaseDateTxt);
         gameDescription = findViewById(R.id.gameDescription);

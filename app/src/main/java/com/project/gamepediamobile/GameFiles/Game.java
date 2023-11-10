@@ -14,9 +14,9 @@ public class Game {
     @SerializedName("background_image")
     @Expose
     private String image;
-    @SerializedName("metacritic")
+    @SerializedName("rating")
     @Expose
-    private String metacritic;
+    private String rating;
 
     public Integer getId() {
         return id;
@@ -42,12 +42,12 @@ public class Game {
         this.image = image;
     }
 
-    public String getMetacritic() {
-        return metacritic;
+    public String getRating() {
+        return rating;
     }
 
-    public void setMetacritic(String metacritic) {
-        this.metacritic = metacritic;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
 }

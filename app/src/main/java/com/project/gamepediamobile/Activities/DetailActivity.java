@@ -23,7 +23,9 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
 import com.project.gamepediamobile.Adapter.ScreenshotAdapter;
 import com.project.gamepediamobile.Constants;
-import com.project.gamepediamobile.GameFiles.GameItem;
+import com.project.gamepediamobile.GameFiles.GameInfo;
+import com.project.gamepediamobile.GameFiles.GameResponse;
+import com.project.gamepediamobile.GameFiles.ParentPlatform;
 import com.project.gamepediamobile.R;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
     RequestQueue requestQueue;
     ProgressBar progressBar;
     StringRequest stringRequest;
-    private TextView gameNameTxt, ratingTxt, playTimeTxt, releaseDateTxt, gameDescription;
+    private TextView gameNameTxt, ratingTxt, playTimeTxt, releaseDateTxt, gameDescription, platformsTxt;
     private NestedScrollView scrollView;
     private int idGame;
     private ShapeableImageView gameImage;
@@ -60,9 +62,11 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
             progressBar.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
 
-            GameItem item = gson.fromJson(response, GameItem.class);
+            //GameItem item = gson.fromJson(response, GameItem.class);
+            GameInfo item = gson.fromJson(response, GameInfo.class);
 
             //Log.i("TAG", "fetchGameDetails: " + response);
+             Log.i("TAG", "platformsTxt: " + item.getParentPlatforms());
             Glide.with(DetailActivity.this)
                     .load(item.getBackgroundImage())
                     .into(gameImage);
@@ -75,7 +79,17 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
             playTimeTxt.setText(String.valueOf(item.getPlaytime()));
             releaseDateTxt.setText(item.getReleased());
             gameDescription.setText(Html.fromHtml(item.getDescription(), Html.FROM_HTML_MODE_COMPACT));
-}, error -> {
+
+            StringBuilder sb = new StringBuilder();
+            for (ParentPlatform platform : item.getParentPlatforms()) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(platform.toString());
+            }
+            platformsTxt.setText(sb.toString());
+            },
+                error -> {
             progressBar.setVisibility(View.GONE);
             Log.i("TAG", "onErrorResponse: " + error.toString());
         });
@@ -90,11 +104,12 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
             progressBar.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
 
-            GameItem item = gson.fromJson(response, GameItem.class);
+            GameResponse.Screenshots item = gson.fromJson(response, GameResponse.Screenshots.class);
             List<String> screenshots = item.getScreenshots();
-            // DEBUGGING ONLY - Log.i("TAG", "fetchScreenShots: " + item.getScreenshots());
 
-            if (item.getScreenshots() != null && !screenshots.isEmpty()) {
+            Log.i("TAG", "fetchScreenShots: " + item.getScreenshots());
+
+            if (!screenshots.isEmpty()) {
                 screenshotAdapter = new ScreenshotAdapter(item.getScreenshots(), this);
                 screenshotRecyclerView.setAdapter(screenshotAdapter);
             }
@@ -136,6 +151,7 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
         gameImage = findViewById(R.id.background_image);
         backBtn = findViewById(R.id.backBtn);
         pic2 = findViewById(R.id.background_image_additional);
+        platformsTxt = findViewById(R.id.platformsListTextView);
         screenshotRecyclerView = findViewById(R.id.imagesRecyclerView);
         screenshotRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 

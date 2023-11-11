@@ -11,6 +11,7 @@
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,16 +160,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/aboutTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:drawableStart="@drawable/ic_round_info_24"
-                android:drawablePadding="5dp"
-                android:drawableTint="@color/white"
                 android:gravity="center_vertical"
-                android:text="Summary"
-                android:textColor="@color/white"
+                android:text="About"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -182,25 +181,52 @@
                 android:text="Coming soon..."
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView17"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintEnd_toEndOf="@+id/aboutTextView"
+                app:layout_constraintStart_toStartOf="@+id/aboutTextView"
+                app:layout_constraintTop_toBottomOf="@+id/aboutTextView" />
+
+            <TextView
+                android:id="@+id/platformsTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:gravity="center_vertical"
+                android:text="Platforms"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gameDescription" />
+
+            <TextView
+                android:id="@+id/platformsListTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="8dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/platformsTextView" />
 
             <TextView
                 android:id="@+id/screenshotsTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic_round_person_24"
-                android:drawablePadding="5dp"
-                android:drawableTint="@color/white"
+                android:paddingStart="16dp"
                 android:gravity="center_vertical"
                 android:text="ScreenShots"
-                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/gameDescription"
-                app:layout_constraintStart_toStartOf="@+id/gameDescription"
-                app:layout_constraintTop_toBottomOf="@id/gameDescription" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/platformsListTextView" />
 
             <TextView
                 android:id="@+id/screenshotsSeeAllTxt"
@@ -213,7 +239,7 @@
                 android:textColor="#399cbd"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/gameDescription"
+                app:layout_constraintTop_toBottomOf="@+id/platformsListTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -234,9 +260,78 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:backgroundTint="#282f32">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageViewHome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.2"
+                    app:srcCompat="@drawable/btn_1"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageViewFavorites"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.2"
+                    app:srcCompat="@drawable/btn_2"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.2"
+                    app:srcCompat="@drawable/btn_3"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imageViewProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.2"
+                    app:srcCompat="@drawable/btn_4"
+                    app:tint="@color/white" />
+            </LinearLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/Floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bottomAppBar"
+            app:maxImageSize="30dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

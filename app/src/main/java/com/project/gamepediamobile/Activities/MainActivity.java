@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.project.gamepediamobile.Constants;
@@ -28,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewNewGames, recyclerViewUpcomingGames, recyclerViewTopGames;
     private RequestQueue requestQueue;
     private ProgressBar progressBar, progressBar2, progressbar3;
-
-
+    private TextView seeAllNewGames, seeAllUpcomingGames, seeAllTopGames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     progressBar.setVisibility(View.GONE);
                     GameResponse gameResponse = gson.fromJson(response, GameResponse.class);
+
                     List<Game> items = gameResponse.getGames();
                     //Log.i("TAG", "fetchRecentGames: " + response);
                     adapterNewGames = new GameListAdapter(items);
@@ -115,5 +116,9 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarNewReleases);
         progressBar2 = findViewById(R.id.progressBarUpcomingReleases);
         progressbar3 = findViewById(R.id.progressBarTopGames);
+
+        seeAllNewGames = findViewById(R.id.newReleasesSeeAllTxt);
+        seeAllUpcomingGames = findViewById(R.id.upcomingReleasesSeeAllTxt);
+        seeAllTopGames = findViewById(R.id.topGamesSeeAllTxt);
     }
 }

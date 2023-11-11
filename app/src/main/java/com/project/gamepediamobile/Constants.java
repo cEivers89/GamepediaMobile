@@ -2,6 +2,8 @@ package com.project.gamepediamobile;
 
 import android.annotation.SuppressLint;
 
+import com.project.gamepediamobile.GameFiles.ParentPlatform;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.project.gamepediamobile.Constants;
@@ -24,12 +25,11 @@ import com.project.gamepediamobile.R;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView.Adapter adapterNewGames, adapterUpcomingGames, adapterTopGames;
+    private GameListAdapter adapterNewGames, adapterUpcomingGames, adapterTopGames;
     private RecyclerView recyclerViewNewGames, recyclerViewUpcomingGames, recyclerViewTopGames;
     private RequestQueue requestQueue;
     private ProgressBar progressBar, progressBar2, progressbar3;
-
-
+    private TextView seeAllNewGames, seeAllUpcomingGames, seeAllTopGames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
     private void fetchRecentGames() {
         requestQueue = Volley.newRequestQueue(this);
         progressBar.setVisibility(View.VISIBLE);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key=" + Constants.API_KEY + "&dates=" + Constants.getFourMonthsAgo() + "," + Constants.getTodayDate() + "&ordering=-added",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key=" + Constants.API_KEY + "&dates=" + Constants.getFourMonthsAgo() + "," + Constants.getTodayDate() + "&page_size=10&ordering=-released",
                 response -> {
                     Gson gson = new Gson();
                     progressBar.setVisibility(View.GONE);
                     GameResponse gameResponse = gson.fromJson(response, GameResponse.class);
+
                     List<Game> items = gameResponse.getGames();
                     //Log.i("TAG", "fetchRecentGames: " + response);
                     adapterNewGames = new GameListAdapter(items);
@@ -65,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         progressBar2.setVisibility(View.VISIBLE);
         StringRequest stringRequest2 = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key="
-                + Constants.API_KEY + "&dates=" + Constants.getTodayDate()
-                + "," + Constants.getOneYearFromToday() + "&ordering=-added",
+                + Constants.API_KEY + "&dates=" + Constants.getTomorrowDate()
+                + "," + Constants.getOneYearFromToday() + "&page_size=10&ordering=released",
                 response -> {
                     Gson gson = new Gson();
                     progressBar2.setVisibility(View.GONE);
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         progressbar3.setVisibility(View.VISIBLE);
         StringRequest stringRequest3 = new StringRequest(Request.Method.GET, Constants.API_BASE_URL + "?key="
-                + Constants.API_KEY + "&dates=" + Constants.getOneYearAgo()  + "," + Constants.getTodayDate()  + "&metacritic=80,100&ordering=-added",
+                + Constants.API_KEY + "&dates=" + Constants.getOneYearAgo()  + "," + Constants.getTodayDate()  + "&ordering=-rating&page_size=10",
                 response -> {
                     Gson gson = new Gson();
                     progressbar3.setVisibility(View.GONE);
@@ -115,5 +116,9 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarNewReleases);
         progressBar2 = findViewById(R.id.progressBarUpcomingReleases);
         progressbar3 = findViewById(R.id.progressBarTopGames);
+
+        seeAllNewGames = findViewById(R.id.newReleasesSeeAllTxt);
+        seeAllUpcomingGames = findViewById(R.id.upcomingReleasesSeeAllTxt);
+        seeAllTopGames = findViewById(R.id.topGamesSeeAllTxt);
     }
 }

@@ -113,8 +113,8 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="64dp"
-                    android:layout_marginEnd="64dp"
+                    android:layout_marginStart="185dp"
+
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -122,40 +122,16 @@
 
                     <TextView
                         android:id="@+id/ratingTxt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableStart="@drawable/ic_round_star_24"
                         android:drawablePadding="5dp"
-                        android:drawableTint="@color/white"
                         android:gravity="center_vertical"
                         android:text="0"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/playTimeTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/ic_round_access_time_24"
-                        android:drawablePadding="5dp"
-                        android:drawableTint="@color/white"
-                        android:gravity="center_vertical"
-                        android:text="0"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/releaseDateTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_round_calendar_today_24"
-                        android:drawablePadding="5dp"
-                        android:drawableTint="@color/white"
-                        android:gravity="center_vertical"
-                        android:text="0"
-                        android:textAlignment="viewEnd"
                         android:textColor="@color/white"
-                        tools:ignore="RtlCompat" />
+                        app:drawableStartCompat="@drawable/ic_round_star_24"
+                        app:drawableTint="@color/white" />
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,26 +168,160 @@
                 android:layout_marginTop="16dp"
                 android:paddingStart="16dp"
                 android:gravity="center_vertical"
-                android:text="Platforms"
+                android:text="Platform"
                 android:textStyle="bold"
                 android:textColor="#ffc107"
                 android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gameDescription" />
 
+
             <TextView
                 android:id="@+id/platformsListTextView"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/platformsTextView" />
+
+            <TextView
+                android:id="@+id/metacriticTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical"
+                android:text="Metacritic"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gameDescription" />
+
+            <TextView
+                android:id="@+id/metacriticScoreTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/platformsListTextView"
+                app:layout_constraintTop_toBottomOf="@+id/metacriticTextView" />
+
+            <TextView
+                android:id="@+id/genresTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:gravity="center_vertical"
+                android:text="Genre"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/platformsListTextView" />
+
+            <TextView
+                android:id="@+id/genresListTextView"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genresTextView" />
+
+            <TextView
+                android:id="@+id/releaseTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical"
+                android:text="Release Date"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/platformsListTextView"/>
+
+            <TextView
+                android:id="@+id/releaseDateTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/genresListTextView"
+                app:layout_constraintTop_toBottomOf="@+id/releaseTextView" />
+
+            <TextView
+                android:id="@+id/developerTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:gravity="center_vertical"
+                android:text="Developer"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genresListTextView" />
+
+            <TextView
+                android:id="@+id/developerListTextView"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developerTextView" />
+
+            <TextView
+                android:id="@+id/publisherTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical"
+                android:text="Publisher"
+                android:textStyle="bold"
+                android:textColor="#ffc107"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genresListTextView"/>
+
+            <TextView
+                android:id="@+id/publisherListTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/developerListTextView"
+                app:layout_constraintTop_toBottomOf="@+id/publisherTextView" />
 
             <TextView
                 android:id="@+id/screenshotsTextView"
@@ -226,7 +336,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/platformsListTextView" />
+                app:layout_constraintTop_toBottomOf="@id/developerListTextView" />
 
             <TextView
                 android:id="@+id/screenshotsSeeAllTxt"
@@ -239,7 +349,7 @@
                 android:textColor="#399cbd"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/platformsListTextView"
+                app:layout_constraintTop_toBottomOf="@+id/developerListTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -247,8 +357,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/screenshotsTextView" />

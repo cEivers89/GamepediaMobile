@@ -18,10 +18,13 @@ public class GameInfo {
     private int playtime;
     @SerializedName("parent_platforms")
     private List<ParentPlatform> parentPlatforms;
-    private List<Genre> genres;
+    private List<Genres> genres;
+    private List<Developers> developers;
+    private List<Publishers> publishers;
 
     public GameInfo(int id, String name, String description, int metacritic, String released, String backgroundImage,
-                    String backgroundImageAdditional, double rating, int playtime, List<ParentPlatform> parentPlatforms, List<Genre> genres) {
+                    String backgroundImageAdditional, double rating, int playtime, List<ParentPlatform> parentPlatforms,
+                    List<Genres> genres, List<Developers> developers, List<Publishers> publishers) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -33,6 +36,8 @@ public class GameInfo {
         this.playtime = playtime;
         this.parentPlatforms = parentPlatforms;
         this.genres = genres;
+        this.developers = developers;
+        this.publishers = publishers;
     }
 
     public Integer id() { return id; }
@@ -75,9 +80,15 @@ public class GameInfo {
 
     public void setParentPlatforms(List<ParentPlatform> parentPlatforms) { this.parentPlatforms = parentPlatforms; }
 
-    public List<Genre> getGenres() { return genres; }
+    public List<Genres> getGenres() { return genres; }
 
-    public void setGenres(List<Genre> genres) { this.genres = genres; }
+    public void setGenres(List<Genres> genres) { this.genres = genres; }
 
+    public List<Developers> getDevelopers() { return developers; }
 
+    public void setDevelopers(List<Developers> developers) { this.developers = developers; }
+
+    public List<Publishers> getPublishers() { return publishers; }
+
+    public void setPublishers(List<Publishers> publishers) { this.publishers = publishers; }
 }

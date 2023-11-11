@@ -27,6 +27,7 @@ import com.project.gamepediamobile.GameFiles.GameInfo;
 import com.project.gamepediamobile.GameFiles.GameResponse;
 import com.project.gamepediamobile.GameFiles.ParentPlatform;
 import com.project.gamepediamobile.R;
+import com.project.gamepediamobile.Utils;
 
 import java.util.List;
 
@@ -35,7 +36,8 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
     RequestQueue requestQueue;
     ProgressBar progressBar;
     StringRequest stringRequest;
-    private TextView gameNameTxt, ratingTxt, playTimeTxt, releaseDateTxt, gameDescription, platformsTxt;
+    private TextView gameNameTxt, ratingTxt, playTimeTxt, releaseDateTxt, gameDescription,
+            platformsTxt, genresTxt, metacriticTxt, developersTxt, publishersTxt;
     private NestedScrollView scrollView;
     private int idGame;
     private ShapeableImageView gameImage;
@@ -62,11 +64,8 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
             progressBar.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
 
-            //GameItem item = gson.fromJson(response, GameItem.class);
             GameInfo item = gson.fromJson(response, GameInfo.class);
 
-            //Log.i("TAG", "fetchGameDetails: " + response);
-             Log.i("TAG", "platformsTxt: " + item.getParentPlatforms());
             Glide.with(DetailActivity.this)
                     .load(item.getBackgroundImage())
                     .into(gameImage);
@@ -76,18 +75,14 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
 
             gameNameTxt.setText(item.getName());
             ratingTxt.setText(String.valueOf(item.getRating()));
-            playTimeTxt.setText(String.valueOf(item.getPlaytime()));
+            //playTimeTxt.setText(String.valueOf(item.getPlaytime()));
             releaseDateTxt.setText(item.getReleased());
             gameDescription.setText(Html.fromHtml(item.getDescription(), Html.FROM_HTML_MODE_COMPACT));
-
-            StringBuilder sb = new StringBuilder();
-            for (ParentPlatform platform : item.getParentPlatforms()) {
-                if (sb.length() > 0) {
-                    sb.append(", ");
-                }
-                sb.append(platform.toString());
-            }
-            platformsTxt.setText(sb.toString());
+            metacriticTxt.setText(String.valueOf(item.getMetacritic()));
+            platformsTxt.setText(Utils.joinListToString(item.getParentPlatforms()));
+            genresTxt.setText(Utils.joinListToString(item.getGenres()));
+            developersTxt.setText(Utils.joinListToString(item.getDevelopers()));
+            publishersTxt.setText(Utils.joinListToString(item.getPublishers()));
             },
                 error -> {
             progressBar.setVisibility(View.GONE);
@@ -106,8 +101,6 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
 
             GameResponse.Screenshots item = gson.fromJson(response, GameResponse.Screenshots.class);
             List<String> screenshots = item.getScreenshots();
-
-            Log.i("TAG", "fetchScreenShots: " + item.getScreenshots());
 
             if (!screenshots.isEmpty()) {
                 screenshotAdapter = new ScreenshotAdapter(item.getScreenshots(), this);
@@ -145,13 +138,17 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
         scrollView = findViewById(R.id.scrollView3);
         gameNameTxt = findViewById(R.id.gameNameTxt);
         ratingTxt = findViewById(R.id.ratingTxt);
-        playTimeTxt = findViewById(R.id.playTimeTxt);
-        releaseDateTxt = findViewById(R.id.releaseDateTxt);
+        // playTimeTxt = findViewById(R.id.playTimeTxt); - NOT CURRENTLY BEING USED - DATA FROM API NOT ACCURATE
+        releaseDateTxt = findViewById(R.id.releaseDateTextView);
         gameDescription = findViewById(R.id.gameDescription);
         gameImage = findViewById(R.id.background_image);
         backBtn = findViewById(R.id.backBtn);
         pic2 = findViewById(R.id.background_image_additional);
         platformsTxt = findViewById(R.id.platformsListTextView);
+        genresTxt = findViewById(R.id.genresListTextView);
+        metacriticTxt = findViewById(R.id.metacriticScoreTextView);
+        developersTxt = findViewById(R.id.developerListTextView);
+        publishersTxt = findViewById(R.id.publisherListTextView);
         screenshotRecyclerView = findViewById(R.id.imagesRecyclerView);
         screenshotRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 

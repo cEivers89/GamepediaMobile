@@ -7,13 +7,9 @@ public class ParentPlatform {
         this.platform = platform;
     }
 
-    public Platform getPlatform() {
-        return platform;
-    }
+    public Platform getPlatform() { return platform; }
 
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
+    public void setPlatform(Platform platform) { this.platform = platform; }
 
     @Override
     public String toString() {

@@ -286,7 +286,7 @@
 
             <TextView
                 android:id="@+id/developerListTextView"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:paddingStart="16dp"
@@ -347,9 +347,9 @@
                 android:layout_marginTop="16dp"
                 android:text="See all"
                 android:textColor="#399cbd"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/developerListTextView"
+                app:layout_constraintTop_toBottomOf="@+id/publisherListTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -415,13 +415,13 @@
                     app:tint="@color/white" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageViewCategory"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="5dp"
                     android:layout_weight="0.2"
-                    app:srcCompat="@drawable/btn_3"
+                    app:srcCompat="@drawable/baseline_library_24"
                     app:tint="@color/white" />
 
                 <ImageView
@@ -437,6 +437,7 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/homeFab"
             style="@style/Floating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

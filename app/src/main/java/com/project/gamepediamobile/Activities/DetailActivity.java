@@ -19,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.gson.Gson;
 import com.project.gamepediamobile.Adapter.ScreenshotAdapter;
@@ -44,6 +45,7 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
     private ImageView backBtn, pic2;
     private ScreenshotAdapter screenshotAdapter;
     private RecyclerView screenshotRecyclerView;
+    private FloatingActionButton homeFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +153,12 @@ public class DetailActivity extends AppCompatActivity implements ScreenshotAdapt
         publishersTxt = findViewById(R.id.publisherListTextView);
         screenshotRecyclerView = findViewById(R.id.imagesRecyclerView);
         screenshotRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        homeFab = findViewById(R.id.homeFab);
 
         backBtn.setOnClickListener(v -> finish());
+
+        homeFab.setOnClickListener(v -> {
+            finish();
+        });
     }
 }

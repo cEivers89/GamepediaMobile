@@ -20,7 +20,7 @@
     </item>
 
     <item
-        android:drawable="@drawable/float_icon"
+        android:drawable="@drawable/baseline_home_24"
         android:bottom="15dp"
         android:left="15dp"
         android:right="15dp"

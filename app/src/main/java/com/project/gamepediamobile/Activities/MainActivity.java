@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.project.gamepediamobile.Constants;
 import com.project.gamepediamobile.GameFiles.Game;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private ProgressBar progressBar, progressBar2, progressbar3;
     private TextView seeAllNewGames, seeAllUpcomingGames, seeAllTopGames;
+    private FloatingActionButton homeFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,5 +122,13 @@ public class MainActivity extends AppCompatActivity {
         seeAllNewGames = findViewById(R.id.newReleasesSeeAllTxt);
         seeAllUpcomingGames = findViewById(R.id.upcomingReleasesSeeAllTxt);
         seeAllTopGames = findViewById(R.id.topGamesSeeAllTxt);
+
+        homeFab = findViewById(R.id.homeFab);
+
+        homeFab.setOnClickListener(v -> {
+            recyclerViewNewGames.smoothScrollToPosition(0);
+            recyclerViewUpcomingGames.smoothScrollToPosition(0);
+            recyclerViewTopGames.smoothScrollToPosition(0);
+        });
     }
 }

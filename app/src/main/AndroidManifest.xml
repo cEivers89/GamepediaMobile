@@ -14,6 +14,15 @@
         android:theme="@style/Theme.Gamepedia"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.TopGamesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.UpcomingGamesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.NewGamesActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.DetailActivity"
             android:exported="false" />
         <activity
